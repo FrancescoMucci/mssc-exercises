@@ -1,0 +1,477 @@
+\chapter{Sistemi Sequenziali}
+\label{chap:parte2}
+
+\section*{Esercizio 5.5}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 5.5}
+
+\begin{tcolorbox} \cite{mssc2016}
+Dimostrare che  $\mathbf{SK} = \mathbf{KI}$ dove \[
+	\mathbf{S} \equiv \lambda{xyz}.xz(yz), \qquad
+	\mathbf{K} \equiv \lambda{xy}.x, \qquad
+	\mathbf{I} \equiv \lambda{x}.x.
+\]
+\end{tcolorbox}
+
+\begin{customlemma}{5.5.1} \label{lemma:5.5.1}
+Siano $\mathbf{S} \equiv \lambda{xyz}.xz(yz)$ e 
+$\mathbf{K}  \equiv \lambda{xy}.x \equiv \lambda{uv}.u$, possiamo provare che $\mathbf{SK}$ è $\beta$-riducibile in $\lambda{yz}.z$.
+\end{customlemma}
+
+\begin{proof}
+$\beta$-riduciamo $\mathbf{SK}$ seguendo la strategia di riduzione normal-order:
+\begin{align*}
+\mathbf{SK} & \ \; \equiv \; \ (\lambda{xyz}.xz(yz)) (\lambda{uv}.u) \\
+			& \longrightarrow_{\beta} \lambda{yz}.(\lambda{uv}.u)z(yz) \\ 
+			& \longrightarrow_{\beta} \lambda{yz}.(\lambda{v}.z)(yz) \\
+			& \longrightarrow_{\beta} \lambda{yz}.z.
+\end{align*}
+Abbiamo quindi mostrato che $\mathbf{SK} \Longrightarrow_{\beta} \lambda{yz}.z$ \footnote{$\lambda{yz}.z$ non contiene alcun $\beta$-redesso, risulta quindi essere una $\beta$-forma normale.}.
+\end{proof}
+
+\begin{customlemma}{5.5.2} \label{lemma:5.5.2}
+Siano $\mathbf{K} \equiv \lambda{xy}.x \equiv \lambda{uv}.u$ e
+$\mathbf{I} \equiv \lambda{x}.x$, 
+possiamo provare che $\mathbf{KI}$ è $\beta$-riducibile in $\lambda{vx}.x$.
+\end{customlemma}
+
+\begin{proof}
+$\beta$-riduciamo $\mathbf{KI}$ seguendo la strategia di riduzione normal-order:\\
+\[
+\mathbf{SK} \equiv (\lambda{uv}.u) (\lambda{x}.x)
+			\longrightarrow_{\beta} \lambda{v}.\lambda{x}.x
+			\equiv \lambda{vx}.x.
+\]
+Abbiamo quindi mostrato che $\mathbf{KI} \Longrightarrow_{\beta} \lambda{vx}.x$.
+\end{proof}
+
+\begin{customthm}{5.5.3}
+Siano $\mathbf{S}$, $\mathbf{K}$ e $\mathbf{I}$ i termini del lambda calcolo definiti nei lemmi \ref{lemma:5.5.1} e \ref{lemma:5.5.2}, possiamo provare che $\mathbf{SK} =_{\beta} \mathbf{KI}$.
+\end{customthm}
+
+\begin{proof}
+Come conseguenza dei lemmi \ref{lemma:5.5.1} e \ref{lemma:5.5.2} e per la definizione di $\beta$-congruenza, possiamo affermare che:
+\begin{align*}
+	\mathbf{SK} \Longrightarrow_{\beta} \lambda{yz}.z
+		 & \implica \mathbf{SK} =_{\beta} \lambda{yz}.z \text{,}\\
+	\mathbf{KI} \Longrightarrow_{\beta} \lambda{vx}.x 
+		 & \implica \mathbf{KI} =_{\beta} \lambda{vx}.x.
+\end{align*}
+Dato che $\lambda{yz}.z \equiv \lambda{vx}.x $ e $=_{\beta}$ è una relazione di congruenza, possiamo concludere che $\mathbf{SK} =_{\beta} \mathbf{KI}$.
+\end{proof}
+
+\section*{Esercizio 6.6}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 6.6}
+\label{es:6.6}
+
+\begin{tcolorbox} \cite{mssc2016}
+Si studi l'insieme $V^*$ delle stringhe finite sull'alfabeto $V=\{a,b,c\}$, con l'ordinamento $\alpha \sqsubseteq \alpha\beta$, dove $\alpha\beta$ indica la concatenazione delle stringhe $\alpha$ e $\beta$.
+\begin{enumerate}
+\item La struttura $(V^*,\ \sqsubseteq )$ è un ordinamento parziale?
+\item Esiste l'elemento minimo?
+\item \`E completo?
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{customthm}{6.6.1}[$(V^*,\ \sqsubseteq )$ è un poset]
+\label{th:6.6.1}
+Sia $V=\{a,b,c\}$ e sia $\sqsubseteq$ una relazione binaria su $V^*$ tale che $\alpha \sqsubseteq \beta$ se e solo se $\exists \ x \in V^* \tc \beta = \alpha x$. La struttura $(V^*,\ \sqsubseteq )$ è un ordinamento parziale.
+\end{customthm}
+
+\begin{proof}
+Per provare che la struttura $(V^*,\ \sqsubseteq )$ è un ordinamento parziale ci basta mostrare che $\sqsubseteq$ è una relazione d'ordine parziale su $V^*$ e cioè che $\sqsubseteq$ è 
+\begin{enumerate}
+\item riflessiva: 
+	$\forall \ s \in V^* \valeche s \sqsubseteq s;$ 
+\item transitiva: 
+	$\forall \ \alpha, \beta, \gamma \in V^* \valeche 
+		\alpha \sqsubseteq \beta \myland \beta \sqsubseteq \gamma 
+		\implies \alpha \sqsubseteq \gamma;$ 
+\item antisimmetrica: 
+	$\forall \ \alpha, \beta \in V^* \valeche
+		\alpha \sqsubseteq \beta \myland \beta \sqsubseteq \alpha
+		\implies \alpha = \beta.$
+\end{enumerate}
+\begin{enumerate}[leftmargin=*]
+\item \textit{Proviamo che $\sqsubseteq$ è riflessiva}. Essendo che la stringa vuota $\varepsilon$ è l'elemento neutro dell'operazione di concatenazione tra stringhe, sappiamo che \[
+	\forall \ s \in V^* \valeche s = s \varepsilon;
+\]
+dunque, per definizione di $\sqsubseteq$, risulta che \[
+	s = s \varepsilon \implies s \sqsubseteq s.
+\]
+\item \textit{Proviamo che $\sqsubseteq$ è transitiva}. Siano $\alpha$ e $\beta$, stringhe finite sull'alfabeto $V$, tali che $\alpha \sqsubseteq \beta \myland \beta \sqsubseteq \gamma$. 
+Per definizione di $\sqsubseteq$, abbiamo che
+\begin{align*}
+	& \alpha \sqsubseteq \beta \implies \exists \ x \in V^* \tc \beta = \alpha x;\\
+	& \beta \sqsubseteq \gamma \implies \exists \ y \in V^* \tc \gamma = \beta y.
+\end{align*} 
+Risulta quindi immediato che \[
+	\beta = \alpha x \myland \gamma = \beta y \implies \gamma = \alpha z \con z = xy.
+\]
+Infine, per definizione di $\sqsubseteq$, possiamo concludere che \[
+	\gamma = \alpha z \implies \alpha \sqsubseteq \gamma.
+\]
+\item \textit{Proviamo che $\sqsubseteq$ è antisimmetrica}. Siano $\alpha$ e $\beta$, stringhe finite sull'alfabeto $V$, tali che $\alpha \sqsubseteq \beta \myland \beta \sqsubseteq \alpha$.
+Per definizione di $\sqsubseteq$, abbiamo che
+\begin{align*}
+	& \alpha \sqsubseteq \beta \implies \exists \ x \in V^* \tc \beta = \alpha x;\\
+	& \beta \sqsubseteq \alpha \implies \exists \ y \in V^* \tc \alpha = \beta y.
+\end{align*} 
+Risulta quindi immediato che \[
+	\beta = \alpha x \myland \alpha = \beta y \implies \alpha = \alpha xy.
+\]
+Essendo che la $\varepsilon$ è l'elemento neutro della concatenazione, possiamo affermare che \[
+	\alpha = \alpha xy \implies x = \varepsilon \myland y = \varepsilon.
+\]
+Possiamo quindi concludere che \[
+	y = \varepsilon \; \myland \; \alpha = \beta y \implies \alpha = \beta.
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{customthm}{6.6.2}[$(V^*,\ \sqsubseteq )$ ha elemento minimo]
+\label{th:6.6.2}
+Sia $(V^*,\ \sqsubseteq )$ il poset definito nel teorema \ref{th:6.6.1}, questo ha come elemento minimo la stringa vuota $\varepsilon$ \footnote{Essendo che $(V^*,\ \sqsubseteq )$ è un poset, se questo ha un minimo, tale minimo è unico.}.
+\end{customthm}
+
+\begin{proof}
+Sappiamo che la stringa vuota è l'elemento neutro dell'operazione di concatenazione tra stringhe, possiamo dunque affermare che \[
+	\forall \ s \in V^* \valeche s = \varepsilon s.
+\]
+Per definizione di $\sqsubseteq$, risulta immediatamente che \[
+	s = \varepsilon s \implies \varepsilon \sqsubseteq s.
+\]
+Abbiamo provato che $\forall \ s \in V^* \valeche \varepsilon \sqsubseteq s$, possiamo infine concludere che $\varepsilon$ è l'elemento minimo del poset $(V^*,\ \sqsubseteq )$.
+\end{proof}
+
+\begin{customthm}{6.6.3}[$(V^*,\ \sqsubseteq )$ non è un CPO]
+\label{th:6.6.3}
+Sia $(V^*,\ \sqsubseteq )$ il poset definito nel teorema \ref{th:6.6.1}, questo non è completo.
+\end{customthm}
+
+Affinché sia un CPO, $(V^*,\ \sqsubseteq )$ deve soddisfare le seguenti condizioni:
+\begin{enumerate}
+\item ha elemento minimo;
+\item ogni catena in $(V^*,\ \sqsubseteq )$ ha estremo superiore.
+\end{enumerate}
+
+\begin{proof}
+Abbiamo già provato che l'elemento minimo di $(V^*,\ \sqsubseteq )$ è la stringa vuota $\varepsilon$, tuttavia possiamo provare che non tutte le catene in $(V^*,\ \sqsubseteq )$ hanno un estremo superiore. In modo informale possiamo giungere a questa conclusione riflettendo sul fatto che 
+\begin{itemize}
+\item in $(V^*,\ \sqsubseteq )$ possiamo trovare delle catene numerabili \footnote{Con catena numerabile intendiamo un poset totalmente ordinato il cui insieme di riferimento ha cardinalità pari a $\aleph_0$.};
+\item $V^*$ contiene unicamente stringhe finite.
+\end{itemize}
+Se consideriamo una qualsiasi catena numerabile in $(V^*,\ \sqsubseteq )$, questa avrà un estremo superiore solo se da un certo punto in poi gli elementi della catena assumono un valore costante. Se ciò non succede, l'unico estremo superiore possibile sarebbe una stringa  $\omega$ di lunghezza infinita che risulti elemento assorbente per la concatenazione di stringhe; tuttavia un tale estremo superiore non potrà esistere in quanto $V^*$ contiene unicamente stringhe finite su $V$.\\
+Per provare formalmente quanto espresso a parole ci basta trovare un controesempio, cioè una catena in $(V^*,\ \sqsubseteq )$ per cui non esiste estremo superiore. Consideriamo l'insieme delle stringhe di lunghezza finita qualsiasi composte unicamente dal carattere $a$:\[
+	A^* = \{a\}^* = \{\varepsilon, a, aa, aaa, \ldots, a \ldots a, \ldots \}.
+\]
+Lavorando per induzione sulla lunghezza delle stringhe di $A^*$, si può facilmente vedere che \footnote{Per la dimostrazione completa si veda la proposizione \ref{prop:6.6.3.1} presente in appendice.}
+\begin{align*}
+	& A^* \subseteq V^*; \\
+	& \varepsilon \sqsubseteq a \sqsubseteq aa \sqsubseteq aaa \sqsubseteq \ldots 
+		\sqsubseteq a \ldots a \sqsubseteq \ldots.
+\end{align*}
+Risulta dunque chiaro che $(A^*, \sqsubseteq)$ sia una catena in $(V^*,\ \sqsubseteq )$ e, in particolare, una catena numerabile dato che i suoi elementi possono essere messi in corrispondenza biunivoca con i naturali nel seguente modo:
+\begin{align*}
+	& a^0 = \varepsilon;\\
+	& a^{n+1} = a a^n = a^n a \ \forall \ n \geq 0.
+\end{align*}
+Se indichiamo la lunghezza di una stringa $s$ con $|s|$, risulterà inoltre che 
+\[
+	\forall \ a^n \in A^* \valeche |a^n| = n.
+\]
+Essendo che l'estremo superiore è il minimo dell'insieme dei maggioranti di $A^*$ in $V^*$, per mostrare quanto desiderato ci basterà provare che tale insieme è vuoto. Ragioniamo per assurdo e assumiamo che esista un maggiorante di $A^*$ in $V^*$: \[
+	\exists \ \alpha \in V^* \tc \forall \ a^n \in A^* \valeche a^n \sqsubseteq \alpha.
+\] 
+Per definizione di $\sqsubseteq$ abbiamo che \[
+	a^n \sqsubseteq \alpha \implies \exists \ x \in V^* \tc \alpha = a^nx.
+\]
+Essendo $\alpha$ la concatenazione di due stringhe finite, risulta che \[
+	\alpha = a^nx \myland |a^n| = n \implies |\alpha| = n + |x|;
+\]
+assumendo che $|x|=k$, possiamo affermare che $|\alpha|= n+k$.\\ 
+Per concludere, essendo $\alpha$ un maggiorante di $A^*$ in $V^*$, dovrà valere che $a^{n+k+1} \sqsubseteq \alpha$, ma questo è un assurdo dato che $\alpha$ non potrà contenere come sottostringa iniziale una stringa più lunga di $n+k$.
+\end{proof}
+
+\section*{Esercizio 6.16}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 6.16}
+\label{es:6.16}
+
+\begin{tcolorbox} \cite{mssc2016}
+Dimostrare che la funzione condizionale definita come segue \[
+	ifthenelse_{ext}(x,y,z) = 
+	\begin{cases}
+		\bot, & \text{se}\ x = \bot \\
+		ifthenelse(x,y,z), & \text{altrimenti}
+	\end{cases}
+\]
+è una funzione continua.
+\end{tcolorbox}
+
+\begin{customthm}{6.16}[$ifthenelse_{ext}$ è continua]
+\label{th:6.16}
+Sia $ifthenelse \equiv \lambda xyz. (x = 0) \rightarrow y, z$ la funzione condizionale e sia
+\[
+	ifthenelse_{ext} \equiv \lambda xyz. (x = \bot) \rightarrow \bot, ifthenelse(x,y,z)
+\]
+la sua estensione su $\NAT^3$. Possiamo provare che $ifthenelse_{ext}$ è continua.
+\end{customthm}
+
+\begin{proof}
+Essendo che $ifthenelse_{ext}:\NAT^3 \rightarrow \NAT$ e che in $\NAT^3$ possiamo avere unicamente catene finite lunghe al più 4, per il teorema 6.10 e 6.14 delle dispense del corso \cite{mssc2016}, risulta che \[
+	ifthenelse_{ext} \ \text{è continua} \iff ifthenelse_{ext} \ \text{è monotona}.
+\]
+Di conseguenza, per mostrare che $ifthenelse_{ext}$ è continua, ci basterà provare che è monotona e cioè che preserva l'ordinamento stabilito dalla relazione d'ordine $\sqsubseteq_3$ di $\NAT^3$: \[
+	\forall \ \vec{x}, \vec{y} \in \NAT^3 \valeche
+		\vec{x} \sqsubseteq_3 \vec{y} 
+		\implies ifthenelse_{ext}(\vec{x}) \sqsubseteq ifthenelse_{ext}(\vec{y})
+\]
+Consideriamo due qualsiasi $\vec{x}, \vec{y} \in \NAT^3$ tali che \[
+	\vec{x} = \tupla{x_1, x_2, x_3} \sqsubseteq_3 \tupla{y_1, y_2, y_3} = \vec{y}.
+\]
+Per definizione di $\sqsubseteq_3$ sappiamo quindi che \[
+	x_1 \sqsubseteq y_1 \myland x_2 \sqsubseteq y_2 \myland x_3 \sqsubseteq y_3
+\]
+Andiamo a lavorare per casi:
+\begin{enumerate}
+\item \textit{caso} $x_1 = \bot$;
+\item \textit{caso} $x_1 = 0$;
+\item \textit{caso $x_1 = n \con n>0$}.
+\end{enumerate}
+\begin{enumerate}[leftmargin=*]
+\item \textit{caso $x_1 = \bot$.} Per definizione di $ifthenelse_{ext}$ ed essendo che $\bot$ è il minimo di $\NAT$, risulta che \[
+	ifthenelse_{ext}(\bot, x_2, x_3) = \bot \sqsubseteq ifthenelse_{ext}(y_1, y_2, y_3).
+\]
+\item \textit{caso $x_1 = 0$.} Dato che $\NAT$ è un dominio piatto, abbiamo che \[
+	0 \sqsubseteq y_1 \implies y_1 = 0.
+\]
+Per definizione di $ifthenelse_{ext}$ e per ipotesi, possiamo affermare che \[
+	ifthenelse_{ext}(0, x_2, x_3) = x_2 \sqsubseteq  y_2 = ifthenelse_{ext}(0, y_2, y_3).
+\]
+\item \textit{caso $x_1 = n \con n>0$.}  Dato che $\NAT$ è un dominio piatto, abbiamo che \[
+	n \sqsubseteq y_1 \implies y_1 = n.
+\]
+Per definizione di $ifthenelse_{ext}$ e per ipotesi, possiamo affermare che \[
+	ifthenelse_{ext}(n, x_2, x_3) = x_3 \sqsubseteq  y_3 = ifthenelse_{ext}(n, y_2, y_3).
+\]
+\end{enumerate}
+\end{proof}
+
+\section*{Esercizio 7.6}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 7.6}
+\label{es:7.6}
+
+\begin{tcolorbox} \cite{mssc2016}
+Fornire semantica operazionale e denotazionale del programma \[
+	\textbf{letrec} \ \mathbf{f}(x) \Leftarrow \mathbf{f}(x) \ \textbf{in} \ \mathbf{f}(5).
+\]
+\end{tcolorbox}
+
+Riflettiamo anzitutto, a livello intuitivo, su quale sia il comportamento del programma {\SLF} in questione: la funzione $\mathbf{f}$ è definita ricorsivamente e, indipendentemente dall'argomento fornitole al momento dell'invocazione, richiamerà sempre se stessa; l'esecuzione di $\mathbf{f}(5)$ genererà pertanto una sequenza infinita di chiamate ricorsive e il programma non terminerà mai. \\
+Essendo che abbiamo a che fare con un programma divergente, ci aspettiamo che il suo valore semantico risulti indefinito:
+\begin{itemize}
+\item a livello operazionale, incapperemo in una sequenza infinita di riscritture;
+\item a livello denotazionale, otterremo come risultato della sua interpretazione semantica il valore $\bot$ di $\NAT$.
+\end{itemize}
+Andiamo a verificare formalmente quanto appena detto.
+
+\begin{customexe}{7.6.1}[\textit{Semantica operazionale di} $\textbf{letrec} \ \mathbf{f}(x) \Leftarrow \mathbf{f}(x) \ \textbf{in} \ \mathbf{f}(5)$] \label{es:7.6.1} \hfill \\
+Sia $D = \{ \mathbf{f}(x) \Leftarrow \mathbf{f}(x) \}$.
+Se prendiamo in considerazione la semantica operazionale con chiamata per nome di {\SLF} \footnote{Tabella 7.2 delle dispense del corso \cite{mssc2016}.} e proviamo ad assegnare un significato al nostro programma, otteniamo la seguente sequenza infinita di riscritture:
+\[
+	\mathbf{f}(5) \xrightarrow{\textit{ (Fun) }}_D \mathbf{f}(5) 
+				  \xrightarrow{\textit{ (Fun) }}_D \mathbf{f}(5)
+				  \xrightarrow{\textit{ (Fun) }}_D \cdots
+\]
+Anche se consideriamo la semantica operazionale con chiamata per valore di {\SLF} \footnote{Tabella 7.3 delle dispense del corso \cite{mssc2016}.}, otteniamo una sequenza infinita di riscritture:
+\[
+	\mathbf{f}(5) \dotxrightarrow{\textit{ (Fun') }}_D \mathbf{f}(5) 
+				  \dotxrightarrow{\textit{ (Fun') }}_D \mathbf{f}(5)
+				  \dotxrightarrow{\textit{ (Fun') }}_D \cdots
+\]
+\end{customexe}
+
+\begin{customexe}{7.6.2}[\textit{Semantica denotazionale di} $\textbf{letrec} \ \mathbf{f}(x) \Leftarrow \mathbf{f}(x) \ \textbf{in} \ \mathbf{f}(5)$]  \label{es:7.6.2} \hfill \\
+Notiamo anzitutto che nel programma è stata dichiarata una sola funzione con arità 1, dunque,  facendo riferimento alla definizione delle funzioni di interpretazione semantica fornite nella tabella 7.4 delle dispende del corso \cite{mssc2016}, risulterà che 
+\begin{align*}
+	\vec{F} =  f \text{,} & \qquad \pi_1 \vec{F} = f; \\
+	\vec{X} =  x \text{,} & \qquad \pi_1 \vec{X} = x.
+\end{align*}
+Seguiamo un approccio bottom-up e precomputiamo le funzioni di interpretazione necessarie per dare la semantica del programma {\SLF}:
+\begin{align*}
+\mathcal{T} \doublebracket{5} 
+	&= \lambda{f}.\lambda{x}.5 
+		&& \per \textit{(Nat)} \\
+\mathcal{T} \doublebracket{x} 
+	&= \lambda{f}.\lambda{x}.x 
+		&& \per \textit{(Var)} \\
+\mathcal{T} \doublebracket{\mathbf{f}(5)} 
+	&= \lambda{f}.\lambda{x}.f(\mathcal{T} \doublebracket{5} f x)
+		&& \per \textit{(Fun)} \\
+	&= \lambda{f}.\lambda{x}.f((\lambda{g}.\lambda{y}.5) f x) 
+		&& \per \mathcal{T} \doublebracket{5} \\
+	&= \lambda{f}.\lambda{x}.f(5) 
+		&& \per \beta\text{-riduzione} \\
+\mathcal{T} \doublebracket{\mathbf{f}(x)} 
+	&= \lambda{f}.\lambda{x}.f(\mathcal{T} \doublebracket{x} f x)
+		&& \per \textit{(Fun)} \\
+	&= \lambda{f}.\lambda{x}.f((\lambda{g}.\lambda{y}.y) f x) 
+		&& \per \mathcal{T} \doublebracket{x} \\
+	&= \lambda{f}.\lambda{x}.f(x) 
+		&& \per \beta\text{-riduzione} \\
+\mathcal{D} \doublebracket{\mathbf{f}(x) \Leftarrow \mathbf{f}(x)} 
+	&= \mathbf{fix}(\lambda{f}.\mathcal{T}\doublebracket{\mathbf{f}(x)}f) 
+		&& \per \textit{(Dec)} \\
+	&= \mathbf{fix}(\lambda{f}.(\lambda{g}.\lambda{x}.g(x))f) 
+		&& \per \mathcal{T} \doublebracket{f(x)} \\
+	&= \mathbf{fix}(\lambda{f}.\lambda{x}.f(x)) 
+		&& \per \beta\text{-riduzione}
+\end{align*}
+Essendo che il funzionale $\lambda{f}.\lambda{x}.f(x)$ è continuo, per il corollario 6.38 del teorema di Kleene \cite{mssc2016}, sappiamo che esso ha minimo punto fisso equivalente all'estremo superiore della catena di approssimanti della funzione $\mathbf{f}$: \[
+\mathcal{D} \doublebracket{\mathbf{f}(x) \Leftarrow \mathbf{f}(x)} 
+	= \mathbf{sup}\{(\lambda{f}.\lambda{x}.f(x))^i \Omega \mid i \in \N \}
+	\qquad \con \Omega \equiv \lambda{x}.\bot
+\]
+Calcolando le prime approssimanti della catena risulta semplice mostrare come questa sia convergente e abbia estremo superiore pari a $\Omega$: 
+\begin{align*}
+(\lambda{f}.\lambda{x}.f(x))^0 \Omega
+	&= \Omega 
+		&& \per (\lambda{f}.\lambda{x}.f(x))^0 \equiv Id_{\FUN}\\
+(\lambda{f}.\lambda{x}.f(x))^1 \Omega
+	&= (\lambda{f}.\lambda{x}.f(x))((\lambda{f}.\lambda{x}.f(x))^0 \Omega) 
+		&& \per \text{definizione della catena}\\
+	&= (\lambda{f}.\lambda{x}.f(x)) \Omega 
+		&& \per (\lambda{f}.\lambda{x}.f(x))^0 \Omega \\
+	&= \lambda{x}.\Omega(x)
+		&& \per \beta\text{-riduzione} \\
+	&= \lambda{x}.\bot \equiv \Omega
+		&& \per \beta\text{-riduzione} \\
+(\lambda{f}.\lambda{x}.f(x))^2 \Omega
+	&= (\lambda{f}.\lambda{x}.f(x))((\lambda{f}.\lambda{x}.f(x))^1 \Omega) 
+		&& \per \text{definizione della catena} \\
+	&= (\lambda{f}.\lambda{x}.f(x)) \Omega
+		&& \per (\lambda{f}.\lambda{x}.f(x))^1 \Omega \\
+	&= \Omega
+		&& \per (\lambda{f}.\lambda{x}.f(x))^1 \Omega
+\end{align*}
+Risulta quindi che \[
+\mathcal{D} \doublebracket{\mathbf{f}(x) \Leftarrow \mathbf{f}(x)} = \Omega
+\]
+A questo punto abbiamo tutto quello che ci serve per dare la semantica denotazionale del programma {\SLF}:
+\begin{align*}
+\mathcal{P} \doublebracket{\textbf{letrec} \ f(x) \Leftarrow f(x) \ \textbf{in} \ f(5)}
+	&= \mathcal{T} \doublebracket{f(5)} \mathcal{D} \doublebracket{f(x) \Leftarrow f(x)} 0
+		&& \per \textit{(Prg)} \\
+	&= (\lambda{f}.\lambda{x}.f(5)) \Omega 0
+		&& \per \mathcal{T} \doublebracket{f(5)} 
+		   \e \mathcal{D} \doublebracket{f(x) \Leftarrow f(x)} \\
+	&= (\lambda{x}.\Omega(5)) 0
+		&& \per \beta\text{-riduzione} \\
+	&= \Omega(5)
+		&& \per \beta\text{-riduzione} \\
+	&= \bot
+		&& \per \beta\text{-riduzione}
+\end{align*}
+\end{customexe}
+
+\section*{Esercizio 8.5}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 8.5}
+\label{es:8.5}
+
+\begin{tcolorbox}
+\cite{mssc2016}
+Si consideri il comando \[
+	c_1 \ \textbf{then when} \ e \ \textbf{do} \ c_2
+\]
+con la seguente semantica informale: nello stato ottenuto eseguendo $c_1$ viene valutata la condizione $e$; se questa risulta vera, il comando $c_2$ viene valutato nello stato precedente l'esecuzione di $c_1$, altrimenti l'intero comando non ha effetto sullo stato. Fornire la semantica operazionale e denotazionale del comando sopra descritto.
+\end{tcolorbox}
+
+\begin{customexe}{8.5.1}[\textit{Semantica operazionale del comando} $c_1 \ \textbf{then when} \ e \ \textbf{do} \ c_2$] \label{es:8.5.1} \hfill \\
+Per eseguire il comando $c_1\ \textbf{then when}\ e\ \textbf{do}\ c_2$ in uno stato $\sigma$, dovremo prima di tutto valutare $c_1$; tuttavia, non è detto che $c_1$ sia valutabile in un singolo passo, questo perchè la semantica operazionale dei comandi di {\TINY} non è una semantica di valutazione. Se per ridurre $c_1$ in $\mathbf{noaction}$ fossero necessari $n$ passi con $n \geq 2$, potremmo sfuttare la seguente regola per eseguire i primi $n-1$ passi del processo di valutazione:
+\begin{align*}
+&\inferrule
+{\tupla{c_1, \sigma} \longrightarrow \tupla{c'_1, \sigma'} \\ c_1 \neq \mathbf{noaction}}
+{\tupla{c_1\ \textbf{then when}\ e\ \textbf{do}\ c_2, \sigma} 
+	\longrightarrow \tupla{c'_1\ \textbf{then when}\ e\ \textbf{do}\ c_2, \sigma'}}
+&& (\textit{ThenWhen}_0)
+\end{align*}
+Se $c_1$ è stato ridotto in un comando valutabile in un singolo passo o lo è fin dall'inizio, potremo usare una di queste due regole per valutare completamente il comando principale:
+\begin{align*}
+&\inferrule
+{\tupla{c_1, \sigma} \longrightarrow \tupla{\mathbf{noaction}, \sigma'} \\
+	\tupla{e, \sigma'} \longtwoheadrightarrow \sigma'' \\
+	\sigma''(\res) = \text{true}}
+{\tupla{c_1\ \textbf{then when}\ e\ \textbf{do}\ c_2, \sigma} 
+	\longrightarrow \tupla{c_2, \sigma}}
+&& (\textit{ThenWhen}_1) \\
+&\inferrule
+{\tupla{c_1, \sigma} \longrightarrow \tupla{\mathbf{noaction}, \sigma'} \\
+	\tupla{e, \sigma'} \longtwoheadrightarrow \sigma'' \\
+	\sigma''(\res) = \text{false}}
+{\tupla{c_1\ \textbf{then when}\ e\ \textbf{do}\ c_2, \sigma} 
+	\longrightarrow \tupla{\mathbf{noaction}, \sigma}}
+&& (\textit{ThenWhen}_2)
+\end{align*}
+\end{customexe}
+Entrambe le regole codificano il fatto che l'espressione $e$ verrà valutata nello stato $\sigma'$ ottenuto a seguito del completamento della valutazione del comando $c_1$. Se $e$ risultasse vera, potremmo usare la regola $(\textit{ThenWhen}_1)$ ed il significato operazionale dell'intero comando corrisponderà a quello attribuito all'esecuzione di $c_2$ nello stato di partenza $\sigma$; altrimenti, sfrutteremo la regola $(\textit{ThenWhen}_2)$ che ci permetterà di considerare il comando terminato e di ripristinare lo stato $\sigma$.
+
+\begin{customexe}{8.5.2}[\textit{Semantica denotazionale del comando} $c_1 \ \textbf{then when} \ e \ \textbf{do} \ c_2$] \label{es:8.5.2} \hfill \\
+Nel caso della semantica denotazionale dobbiamo considerare anche le possibili situazioni di errore; in particolare, il risultato dell'interpretazione dell'intero comando dovrà restituire errore nei seguenti casi:
+\begin{itemize}
+\item se l'interpretazione di $c_1$ nello stato $\sigma$ ci dà errore;
+\item se l'interpretazione di $e$ nello stato $\sigma'$ ci dà errore;
+\item se il valore ottenuto dall'interpretazione di $e$ non è un booleano.
+\end{itemize}
+Possiamo quindi aggiungere il seguente caso alla definizione della funzione di interpretazione dei comandi di {\TINY}:
+\begin{align*}
+&\mathcal{C}\doublebracket{c_1 \ \textbf{then when} \ e \ \textbf{do} \ c_2} \triangleq \lambda{\sigma}. \\
+&\tab \mathbf{cases} \ \mathcal{C}\doublebracket{c_1} \sigma \ \mathbf{of} \\
+&\tab \tab \sigma': \\
+&\tab \tab \tab \mathbf{cases} \ \mathcal{E}\doublebracket{e} \sigma' \ \mathbf{of} \\
+&\tab \tab \tab \tab \tupla{v, \sigma''}: (is{\BOOL} \ v) \rightarrow \\
+&\tab \tab \tab \tab \tab \tab v \rightarrow \mathcal{C}\doublebracket{c_2} \sigma, \sigma, \\
+&\tab \tab \tab \tab \tab \tab error; \\
+&\tab \tab \tab \tab error: error; \\
+&\tab \tab \tab \mathbf{endcases}; \\
+&\tab \tab error: error \\
+&\tab \mathbf{endcases} \\
+\end{align*}
+\end{customexe}
+
+\section*{Esercizio 9.9}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 9.9}
+\label{es:9.9}
+
+\begin{tcolorbox}
+\cite{mssc2016}
+Fornire una semantica non standard di {\SMALL}, che ad ogni programma associa il numero corrispondente alle volte che un assegnamento viene effettuato dal programma.
+\end{tcolorbox}
+Per fornire una semantica denotazionale di {\SMALL} che ad ogni programma associa il numero di assegnamenti eseguiti, rispetto a quella vista durante il corso, dovremo andare a modificare la definizione della funzione di interpretazione semantica:
+\begin{enumerate}
+\item dei programmi, $\mathcal{P}$;
+\item dei comandi, $\mathcal{C}$, nel caso specifico dell'assegnamento.
+\end{enumerate}
+Inoltre, per tener traccia del numero di assegnamenti eseguiti, sfrutteremo una nuova locazione di memoria riservata che chiameremo $lassign$.
+\begin{enumerate}[leftmargin=*]
+\item Il codominio della funzione di interpretazione dei programmi dovrà essere modificato in quanto, nel caso in cui non ci siano errori, il valore associato al programma non sarà più la sequenza di valori di base che rappresentano l'output, ma bensì un singolo naturale corrispondente al numero di assegnamenti eseguiti; risulta dunque che:\[
+\mathcal{P}: \ Prog \longrightarrow {\BVAL}^* \longrightarrow ({\NAT} + \{error\}).
+\]
+La definizione di $\mathcal{P}$ dovrà quindi essere modificata per far sì che, in assenza di errori, al posto del contenuto di $lout$ venga restituito quello di $lassign$; dovremo inoltre ricordarci di modificare la memoria iniziale $\sigma_0 \equiv \lambda{l}.unused$ in modo tale che alla locazione $lassign$ venga inizialmente associato il valore $0$: \[
+\mathcal{P}\doublebracket{\mathbf{program} \ c} \overrightarrow{in} \triangleq 
+	\mathcal{C} 
+		\doublebracket{c} \rho_0 \sigma_0 [\overrightarrow{in}/\lin] [nil/\lout] [0/\lassign]
+	\star \lambda{\sigma}.\sigma(\lassign)
+\]
+\item La funzione di interpretazione semantica dei comandi {\SMALL} dovrà essere modificata in modo che, ogni volta in cui un assegnamento viene interpretato, il contenuto della locazione $lassign$ venga incrementato di uno: \[
+\mathcal{C}\doublebracket{e \coloneqq e'} \rho \triangleq 
+	\mathcal{E} \doublebracket{e} \rho
+	\star check{\LOC}
+	\star \lambda{l}.\mathcal{R} \doublebracket{e'} \rho
+	\star \lambda{v}{\sigma}.\sigma[v/l] [\sigma(\lassign) + 1 / \lassign]
+\]
+\end{enumerate}

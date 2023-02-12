@@ -1,0 +1,70 @@
+\chapter{Appendice: dimostrazioni addizionali}
+\label{appendix:dim-induciton}
+
+\begin{customprop}{6.6.3.1}
+\label{prop:6.6.3.1}
+Sia $(V^*,\ \sqsubseteq )$ il poset definito nel teorema \ref{th:6.6.1} e sia $A^*$ l'insieme delle stringhe finite sull'alfabeto $A = \{a\}$. Possiamo provare che $(A^*, \sqsubseteq)$ è una catena in $(V^*,\ \sqsubseteq )$ \footnote{Questa proposizione è stata usata nella prova del teorema \ref{th:6.6.3}.}.
+\end{customprop}
+\begin{proof}
+Gli elementi di $A^*$ possono essere messi in corrispodenza biunivoca con i naturali nel seguente modo:
+\begin{align*}
+	& a^0 = \varepsilon;\\
+	& a^{n+1} = a a^n = a^n a \ \forall \ n \geq 0.
+\end{align*}
+Di conseguenza, per provare che $(A^*, \sqsubseteq)$ è una catena in $(V^*,\ \sqsubseteq )$, dobbiamo mostrare che \[
+	\forall\ n \in \N \valeche a^n \in V^* \myland \ a^n \sqsubseteq a^{n+1}.
+\]
+Procediamo nella dimostrazione lavorando per induzione su $n$.
+\begin{itemize}
+\item \textit{Caso base ($n=0$).} Essendo che $a^0 = \varepsilon$ e che $V^*$ è chiusura riflessiva e transitiva di $V$, risulta che $a^0 \in V^*$. Dato che $\varepsilon$ è l'elemento neutro della concatenazione di stringhe, abbiamo che $a = \varepsilon a$; dunque, per definizione di $\sqsubseteq$, possiamo concludere che $a^0 = \varepsilon \sqsubseteq a = a^1$.
+\item \textit{Passo induttivo ($n=k+1$).} Assumiamo che la tesi sia vera per stringhe lunghe al più $k$ e mostriamo che risulta ancora vera per stringhe lunghe $k+1$. Per definizione di concatenazione di stringhe, abbiamo che \[
+	a^{k+1} = a a^k.
+\]
+Per ipotesi induttiva ed essendo che $\forall\ n \in \N \valeche |a^n| = n$, sappiamo che \[
+	a \in V \subseteq V^* \myland a \in V^k \subseteq V^*.
+\]
+Dunque, per concatenazione di linguaggi e per definizione di $V^*$, possiamo affermare che \[
+	a a^k \in V \cdot V^k = V^{k+1} \subseteq V^*.
+\]
+Infine, essendo che $a^{k+2} = a^{k+1} a$, per definizione di $\sqsubseteq$, possiamo concludere che $a^{k+1} \sqsubseteq a^{k+2}$.
+\end{itemize}
+\end{proof}
+
+\begin{customprop}{11.8.2.1}
+\label{prop:11.8.2.3.1}
+Sia $\tupla{Q, A_{\tau}, \rightarrow}$ un LTS e sia $S$ una bisimulazione di branching su $Q$, possiamo provare che \footnote{Questa proposizione è stata usata nella prova del lemma \ref{lemma:11.8.2.3}.} \[
+	\forall\ q,q_x,r \in Q \valeche
+	\tupla{q, r} \in S \myland q \xRightarrow{\varepsilon} q_x 
+	\implies \tupla{q_x, r} \in S.
+\]
+\end{customprop}
+\begin{proof}
+Per definizione di relazione di transizione debole, sappiamo che \[
+	q \xRightarrow{\varepsilon} q_x
+	\implies \exists\ n \in \N \tc q (\xrightarrow{\tau})^n q_x;
+\]
+di conseguenza, per dimostrare quanto desiderato, possiamo lavorare per induzione su $n$, lunghezza della sequenza di $\tau$ eseguiti a partire da $q$ per arrivare in $q_x$.
+\begin{itemize}
+\item \textit{Caso base ($n=0$).}. Per definizione di potenza di una relazione sappiamo che $(\xrightarrow{\tau})^0 = Id_Q$, ma allora possiamo affermare che \[
+	q (\xrightarrow{\tau})^0 q_x \implies q \equiv q_x.
+\]
+Essendo che per ipotesi sappiamo già che $\tupla{q, r} \in S$, risulta immediato che \[
+	\tupla{q_x, r} \in S.
+\]
+\item \textit{Passo induttivo ($n=k+1$).} Assumiamo che la tesi sia vera per sequenze di azione $\tau$ lunghe al più $k$ e mostriamo che risulta ancora vera per sequenze lunghe $k+1$.
+Per definizione di potenza di una relazione sappiamo che 
+$(\xrightarrow{\tau})^{k+1} = (\xrightarrow{\tau}) \cdot (\xrightarrow{\tau})^k$,
+ma allora possiamo affermare che  \[
+	q (\xrightarrow{\tau})^{k+1} q_x \implies \exists\ q_w \tc
+	q (\xrightarrow{\tau}) q_w (\xrightarrow{\tau})^k q_x.
+\]
+Per ipotesi induttiva, risulta che \[
+	\tupla{q,r} \in S \myland q (\xrightarrow{\tau}) q_w
+	\implies \tupla{q_w, r} \in S.
+\]
+Sempre per ipotesi induttiva, possiamo infine concludere che \[
+	\tupla{q_w,r} \in S \myland q_w (\xrightarrow{\tau})^k q_x
+	\implies \tupla{q_x, r} \in S.
+\]
+\end{itemize}
+\end{proof}

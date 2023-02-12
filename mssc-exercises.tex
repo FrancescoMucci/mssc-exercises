@@ -1,0 +1,175 @@
+%--------------------------------------------------------------
+% - template for the main file of Informatica@Unifi Thesis 
+% - based on Classic Thesis Style Copyright (C) 2008 
+%   Andr\'e Miede http://www.miede.de   
+%--------------------------------------------------------------
+
+%--------------------DOCUMENT-CLASS----------------------------
+\documentclass[openright,titlepage,oneside,fleqn,
+	headinclude,10pt,a4paper,footinclude]{scrbook}
+
+% sostituire "oneside" con "twoside" per stampa fronte-retro
+% aggiungere "hidelinks" per eliminare i box nei link ipertestuali
+%--------------------------------------------------------------
+
+%--------------------PACKAGES----------------------------------
+\usepackage[italian]{babel} % italian rende i nomi "bibliography" e "index" in italiano
+\usepackage[fixlanguage]{babelbib} % per nomi nella bibliografia con formattazione italiano
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc} 
+\usepackage[square,numbers]{natbib} 
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{ellipsis}
+\usepackage{subfig}
+\usepackage[format=plain,labelformat=simple,labelsep=colon]{caption}
+\usepackage{siunitx}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{dia-classicthesis-ldpkg}
+\usepackage[eulerchapternumbers, linedheaders, subfig, beramono, eulermath, parts, dottedtoc]{classicthesis}
+
+\usepackage{amsthm} % per teoremi
+
+\usepackage{enumitem} % per personalizzare le liste
+
+\usepackage{tcolorbox} % per box colorati
+
+\usepackage{mathtools} % per scrivere sopra a frecce
+
+\usepackage{stmaryrd} % per double braket symbol
+
+\usepackage{mathpartir} % per sistemi di inferenza
+
+\usepackage{tikz} % per automi a stati finiti
+\usetikzlibrary{arrows,arrows.meta,automata,positioning,shapes}
+\tikzset{elliptic state/.style={draw,ellipse}}
+%---------------------------------------------------------------
+
+%--------------------NEWCOMMANDS--------------------------------
+\newcommand{\myUni}{Università degli Studi di Firenze}
+\newcommand{\myFaculty}{Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
+\newcommand{\myDegree}{Corso di Laurea Magistrale in Informatica\xspace}
+\newcommand{\myItalianPretitle}{Esercizi per il corso di\xspace}
+\newcommand{\myItalianTitle}{Modelli di Sistemi Sequenziali e Concorrenti\xspace}
+\newcommand{\myProfessor}{Rosario Pugliese\xspace}
+\newcommand{\myAY}{Anno Accademico 2021-2022\xspace}
+\newcommand{\myTime}{12 febbraio 2023\xspace}
+\newcommand{\myName}{Francesco Mucci\xspace}
+\newcommand{\myMatricola}{6173140}
+\newcommand{\myMail}{\href{mailto:francesco.mucci@stud.unifi.it}{\texttt{francesco.mucci@stud.unifi.it}}\xspace}
+\newcommand{\myVersione}{Versione 1.0.0\xspace}
+\newcommand{\mycopyright}{\includegraphics[width=1.25cm]{1-front/copyright/by.png} 
+	\href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}\xspace}
+
+\newcommand{\longtwoheadrightarrow}{\relbar\joinrel\twoheadrightarrow}
+\newcommand{\dotxrightarrow}[1]{\; \bullet \!\!\! \xrightarrow{#1}}
+\newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
+\newcommand{\doublebracket}[1]{\llbracket #1 \rrbracket}
+\newcommand{\tupla}[1]{\langle #1 \rangle}
+\newcommand{\tab}{\hspace{2em}}
+
+\newcommand{\valeche}{,\;}
+\newcommand{\tc}{:\;}
+\newcommand{\myland}{\; \land \;}
+\newcommand{\e}{\; \text{e} \;}
+\newcommand{\se}{\; \text{se} \;}
+\newcommand{\con}{\; \text{con} \;}
+\newcommand{\per}{\; \text{per} \;}
+\newcommand{\allora}{\; \text{allora} \;}
+\newcommand{\implica}{\; \text{implica} \;}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NAT}{\mathbb{NAT}}
+\newcommand{\BOOL}{\mathbb{BOOL}}
+\newcommand{\FUN}{\mathbb{FUN}}
+\newcommand{\BVAL}{\mathbb{BVAL}}
+\newcommand{\LOC}{\mathbb{LOC}}
+
+\newcommand{\res}{\texttt{res}}
+\newcommand{\lin}{\texttt{lin}}
+\newcommand{\lout}{\texttt{lout}}
+\newcommand{\lassign}{\texttt{lassign}}
+
+\newcommand{\SLF}{\textbf{SLF}}
+\newcommand{\TINY}{\textbf{TINY}}
+\newcommand{\SMALL}{\textbf{SMALL}}
+
+\theoremstyle{plain}
+\newtheorem{innercustomthm}{Teorema}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\newtheorem{innercustomlemma}{Lemma}
+\newenvironment{customlemma}[1]
+  {\renewcommand\theinnercustomlemma{#1}\innercustomlemma}
+  {\endinnercustomlemma}
+  
+\newtheorem{innercustomprop}{Proposizione}
+\newenvironment{customprop}[1]
+  {\renewcommand\theinnercustomprop{#1}\innercustomprop}
+  {\endinnercustomprop}
+  
+\theoremstyle{definition}
+\newtheorem{innercustomexe}{Esercizio}
+\newenvironment{customexe}[1]
+  {\renewcommand\theinnercustomexe{#1}\innercustomexe}
+  {\endinnercustomexe}
+
+%--------------------------------------------------------------
+
+%--------------------SETTINGS----------------------------------
+\newlength{\abcd} % for ab..z string length calculation
+\setlength{\extrarowheight}{3pt} % increase table row height
+\captionsetup{format=hang,font=small}
+
+\graphicspath{{other/img/}}
+
+% Layout settings
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	ignoremp,
+	bindingoffset = 1cm, 
+	textwidth     = 13.5cm,
+	textheight    = 21.5cm,
+	lmargin       = 3.5cm, % left margin
+	tmargin       = 4cm    % top margin 
+}
+
+\begin{document}
+%---------------------PARAMETERS-------------------------------
+\frenchspacing
+\raggedbottom
+
+%---------------------FRONTMATTER------------------------------
+\frontmatter 
+
+\include{1-front/title-page-unifi}
+
+\pagestyle{scrheadings}
+ 
+\tableofcontents
+
+%---------------------MAINMATTER-------------------------------
+\mainmatter
+
+\include{2-chapters/esercizi-parte-1}
+
+\include{2-chapters/esercizi-parte-2}
+
+\include{2-chapters/esercizi-parte-3}
+
+%---------------------APPENDIX---------------------------------
+\appendix
+\include{3-appendix/a-induction}
+
+%---------------------BACK-MATTER------------------------------
+\backmatter
+
+\bibliography{4-back/bibliografia}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\bibliographystyle{babunsrt-fl}
+
+\end{document}

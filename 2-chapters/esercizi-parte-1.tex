@@ -1,0 +1,408 @@
+\chapter{Preliminari matematici}
+\label{chap:parte1}
+
+\section*{Esercizio 2.7}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 2.7}
+\label{es:2.7}
+
+\begin{tcolorbox} \cite{mssc2016} 
+Sia $R$ una relazione binaria su $A$.
+\begin{enumerate}
+\item Si provi che la chiusura riflessiva di $R$ coincide con la relazione\[
+	R \cup Id_A
+\]
+dove $Id_A = \{ (x, x) \mid \ x \in A \}$.
+\item Si provi che la chiusura simmetrica di $R$ coincide con la relazione \[
+	R \cup R^{-1}.
+\]
+\item Si provi che la chiusura transitiva di $R$ coincide con la relazione \[
+	\{(x, y) \mid
+	\exists \ x_1, \ldots, x_n 
+	\con x_i \, R \, x_{i+1} \per 1 \leq i \leq n-1 \text{,} 
+	\ x_1 = x \e x_n = y 
+	\}.
+\]
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{customthm}{2.7.1}[Chiusura riflessiva di una relazione binaria su un insieme $A$]
+\label{th:2.7.1}
+Sia $R$ una relazione binaria su $A$ e $Id_A$ la relazione identità su $A$.
+La chiusura riflessiva di $R$ coincide con la relazione $R \cup Id_A$.
+\end{customthm}
+
+\begin{proof}
+Vogliamo quindi provare che $R \cup Id_A$ è la più piccola relazione riflessiva su $A$ che contiene $R$; per far ciò andremo a mostrare che:
+\begin{enumerate}
+\item $R \subseteq R \cup Id_A$;
+\item $\forall \ a \in A \valeche (a,a) \in R \cup Id_A$;
+\item $\forall \ S \subseteq A \times A \valeche
+	S \ \text{riflessiva} \myland R \subseteq S
+	\implies (R \cup Id_A) \subseteq S$.
+\end{enumerate}
+
+\begin{enumerate}[leftmargin=*]
+\item Per definizione di unione tra insiemi, $R$ è ovviamente sottoinsieme di $R \cup Id_A$.
+\item Per definizione di unione tra insiemi e di $Id_A$, risulta ovvio anche che $R \cup Id_A$ sia riflessiva.
+\item Consideriamo una qualsiasi relazione $S \subseteq A \times A$ che sia riflessiva e che contenga $R$; essendo che $S$ è riflessiva risulterà che $\forall \ a \in A \valeche (a,a) \in S$, ma allora, per defizione di $Id_A$, abbiamo che $Id_A \subseteq S$.
+Per ipotesi sappiamo che $R \subseteq S$ ed abbiamo appena mostrato che $Id_A \subseteq S$,
+da questo, per definizione di unione tra insiemi, segue che $(R \cup Id_A) \subseteq S$.
+\end{enumerate}
+\end{proof}
+
+\begin{customthm}{2.7.2}[Chiusura simmetrica di una relazione binaria su un insieme $A$]
+\label{th:2.7.2}
+Sia $R$ una relazione binaria su $A$.
+La chiusura simmetrica di $R$ coincide con la relazione $R \cup R^{-1}$.
+\end{customthm}
+
+\begin{proof}
+Vogliamo quindi provare che $R \cup R^{-1}$ è la più piccola relazione simmetrica su $A$ che contiene $R$; per far ciò andremo a mostrare che:
+\begin{enumerate}
+\item $R \subseteq R \cup R^{-1}$;
+\item $\forall \ a,b \in A \valeche 
+	(a,b) \in R \cup R^{-1} 
+	\implies (b,a) \in R \cup R^{-1}$;
+\item $\forall \ S \subseteq A \times A \valeche
+	S \ \text{simmetrica} \myland R \subseteq S
+	\implies (R \cup R^{-1}) \subseteq S$.
+\end{enumerate}
+
+\begin{enumerate}[leftmargin=*]
+\item Per definizione di unione tra insiemi, $R$ è ovviamente sottoinsieme di $R \cup R^{-1}$.
+\item Per definizione di inversa di una relazione risulta che 
+$\forall \ (a,b) \in R \valeche (b, a) \in R^{-1}$, ma allora, per definizione di unione tra insiemi, abbiamo che $R \cup R^{-1}$ è sicuramente simmetrica.
+\item Consideriamo una qualsiasi relazione $S \subseteq A \times A$ che sia simmetrica e che contenga $R$. Essendo che $S$ è simmetrica risulterà che $\forall \ (a,b) \in S \valeche (b,a) \in S$; di conseguenza, avendo assunto che $R \subseteq S$, sarà vero che $\forall \ (a,b) \in R \valeche (b,a) \in S$. Possiamo dunque concludere che $R^{-1} \subseteq S$.
+Per ipotesi sappiamo che $R \subseteq S$ ed abbiamo appena mostrato che $R^{-1} \subseteq S$,
+da questo, per definizione di unione tra insiemi, segue che $(R \cup R^{-1}) \subseteq S$.
+\end{enumerate}
+\end{proof}
+
+\begin{customthm}{2.7.3}[Chiusura transitiva di una relazione binaria su un insieme $A$]
+\label{th:2.7.3}
+Sia $R$ una relazione binaria su $A$.
+La chiusura transitiva di $R$ coincide con la relazione $V$ definita come segue 
+\footnote{Si potrebbe dimostrare che $V$ coincide con $R^+$.} \[
+	V \triangleq \{(a, b) \mid 
+	\ \exists \ x_1, \ldots, x_n 
+	\con x_i \, R \, x_{i+1} \per 1 \leq i \leq n-1 \text{,} 
+	\ x_1 = a \text{,} \ x_n = b \e n \geq 2
+	\}.
+\]
+\end{customthm}
+
+\begin{proof}
+
+Vogliamo quindi provare che $V$ è la più piccola relazione transitiva su $A$ che contiene $R$; per far ciò andremo a mostrare che:
+\begin{enumerate}
+\item $R \subseteq V$;
+\item $\forall \ a,b,c \in A \valeche
+	(a,b) \in V \myland (b,c) \in V
+	\implies (a,c) \in V$;
+\item $\forall \ T \subseteq A \times A \valeche
+	T \ \text{transitiva} \myland R \subseteq T
+	\implies V \subseteq T$.
+\end{enumerate}
+
+\begin{enumerate}[leftmargin=*]
+\item Considerando la definizione di $V$, risulta che la seguente relazione sia un suo sottoinsieme: \[
+	\{(a, b) \mid 
+	\ \exists \ x_1, \ x_2 \con x_1 \, R \, x_2 \text{,} 
+	\ x_1 = a \e x_n = b
+	\}.
+\]
+Tale relazione coincide ovviamente con $R$ e dunque quest'ultimo è contenuto in $V$.
+\item Consideriamo tre qualsiasi $a,b,c \in A$ tali che $(a,b) \in V \myland \ (b,c) \in V$.
+Essendo che $(a,b) \in V$, per definizione di $V$, possiamo dire che \[
+	\exists \ x_1, \ldots, x_j 
+	\con x_i \, R \, x_{i+1} \per 1 \leq i \leq j-1 \text{,} 
+	\ x_1 = a \text{,} \ x_j = b \e j \geq 2.
+\]
+Essendo che $(b,c) \in V$, sempre per definizione di $V$, possiamo dire che \[
+	\exists \ y_1, \ldots, y_k
+	\con y_i \, R \, y_{i+1} \per 1 \leq i \leq k-1 \text{,} 
+	\ y_1 = b \text{,} \ y_k = c \e k \geq 2.
+\]
+Rinominando gli $y_i$ nel seguente modo $y_i = x_{j+i-1}$, cioè in modo tale che \[
+	y_1 = x_j = b$ e $y_k = x_{j+k-1} = c \text{,}
+\]
+risulterà immediata la seguente conclusione:
+\begin{align*}
+	& \exists \ x_1, \ldots, x_{j+k-1}
+	\con x_i \, R \, x_{i+1} \per 1 \leq i \leq j+k-2 \text{,}
+	\ x_1 = a \text{,} \ x_{j+k-1} = c \text{,}\\
+	& \e \con j \geq 2 \e k \geq 2.
+\end{align*}
+Possiamo quindi concludere che $(a,c) \in V$ e, conseguentemente, affermare che $V$ sia transitiva.
+\item Consideriamo una qualsiasi relazione $T \subseteq A \times A$ che sia transitiva e che contenga $R$. Noi vogliamo mostrare che $V \subseteq T$ e cioè che \[
+	\se (a,b) \in V \allora (a,b) \in T.
+\]
+Riflettendo sulla definizione di $V$, vogliamo quindi dimostrare che $\forall \ n \geq 2 \valeche$
+\begin{align*}
+	& \se \exists \ x_1, \ldots, x_n
+	\tc \ x_i \, R \, x_{i+1} \per \ 1 \leq i \leq n-1 \text{,} 
+	\con x_1 = a \e \ x_n = b, \\
+	& \allora \ (a,b) \in T.
+\end{align*}
+Procediamo nella dimostrazione lavorando per induzione su $n$.
+\begin{itemize}
+\item \textit{Caso base ($n=2$).} Se $n=2$ e $(x_1=a,x_2=b) \in R$, essendo che per ipotesi $R \subseteq T$, allora possiamo concludere che $(a,b) \in T$.
+\item \textit{Passo induttivo ($n=k+1$).} Assumiamo che la tesi sia vera per $2 \leq n \leq k$ e che \[
+	\exists \ (x_1=a), \ldots, (x_{k+1}=b) 
+	\tc x_i \, R \, x_{i+1} \per 1 \leq i \leq k.
+\]
+Sappiamo dunque che:
+\begin{align}
+	&\exists \ (x_1=a), \ldots, x_k \tc x_i \, R \, x_{i+1} 
+		\per 1 \leq i \leq k-1, \label{2.7.3.3.1} \tag{3.1} \\
+	&(x_k, b) \in R \con x_k \, R \, b. \label{2.7.3.3.2} \tag{3.2}
+\end{align}
+Per il punto \ref{2.7.3.3.1} e per l'ipotesi induttiva, possiamo affermare che $(a,x_k) \in T$; inoltre, per il punto \ref{2.7.3.3.2} e dato che per ipotesi $R \subseteq T$, possiamo dedurre che $(x_k, b) \in T$.
+Possiamo infine concludere che $(a,b) \in T$ dato che, per ipotesi, $T$ è transitiva ed abbiamo appena provato che $(a,x_k) \in T \myland (x_k, b) \in T$.
+\end{itemize}
+
+\end{enumerate}
+\end{proof}
+
+\section*{Esercizio 2.14}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 2.14}
+\label{es:2.14}
+
+\begin{tcolorbox} \cite{mssc2016}
+Sia $\prec$ una relazione ben fondata su un insieme A. Si dimostri che:
+\begin{enumerate}
+\item la sua chiusura transitiva $\prec^+$ è ben fondata;
+\item la sua chiusura riflessiva e transitiva $\prec^*$ è un ordinamento parziale.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{customthm}{2.14.1}[$\prec^+$ è ben fondata]
+\label{th:2.14.1}
+Sia $A$ un insieme e sia ${\prec} \subseteq {A \times A}$ una relazione ben fondata, possiamo provare che anche $\prec^+$ è ben fondata.
+\end{customthm}
+\begin{proof}
+Per dimostrare che $\prec^+$ è ben fondata dobbiamo provare che ogni sottoinsieme non vuoto di $A$ ha almeno un elmento minimale secondo $\prec^+$:
+\[
+	\forall\ S \subseteq A \valeche
+	S \neq \emptyset \implies 
+	\exists\ m \in S \tc
+		\forall\ a \in A \valeche a \prec^+ m \implies a \notin S.
+\]
+Consideriamo un qualsiasi $S \subseteq A$ tale che $S \neq \emptyset$; essendo che $\prec^+$ è la chiusura transitiva di $\prec$, per il teorema \ref{th:2.7.2} abbiamo che
+\begin{align*}
+	& \forall\ s,s' \in S \tc s \prec^+ s' \valeche \\ 
+	& \tab \exists \ x_1, \ldots, x_n \tc x_i \prec x_{i+1} \per 1 \leq i \leq n-1 
+	               \con x_1 = s \text{,} \ x_n = s' \e n \geq 2.
+\end{align*}
+Possiamo di conseguenza costruire l'insieme $S_{seq}$ degli elementi di tutte le possibili sequenze che "collegano" tramite $\prec$ due qualsiasi elementi di $S$: \[
+	S_{seq} \triangleq \bigcup_{s,s' \in\ S}
+		\{x_1, \ldots, x_n \mid x_i \prec x_{i+1} \per 1 \leq i \leq n-1 
+		\con x_1 = s \text{,} \ x_n = s' \e n \geq 2 \}
+\]
+Per costruzione di $S_{seq}$ risulta che \[
+	S \neq \emptyset \implies S_{seq} \neq \emptyset.
+\]
+Essendo che $\prec$ è ben fondata per ipotesi, possiamo affermare che \[
+	S_{seq} \neq \emptyset 
+	\implies \exists\ m_{seq} \in S_{seq} 
+ 	\tc m_{seq}\ \text{è} \prec \text{minimale di}\ S_{seq}.
+\]
+Per costruzione di $S_{seq}$, sappiamo che $m_{seq}$ appartiene ad una sequenza che collega due elementi di $S$:
+\begin{align*}
+	 & m_{seq} \in S_{seq} \implies \\
+	 & \tab m_{seq} \in \{x_1, \ldots, x_n \mid x_i \prec x_{i+1} \per 1 \leq i \leq n-1 
+	   \con x_1 = s \text{,} \ x_n = s' \e n \geq 2 \}.
+\end{align*}
+Assumiamo per assurdo che $m_{seq}$ non sia estremo sinistro della sequenza a cui appartiene: per quanto enunciato sopra, risulterà che \[
+	 m_{seq} = x_k \con k \geq 2 \implies x_{k-1} \prec m_{seq},
+\]
+ma questo non è possibile dato che $m_{seq}$ è minimale di $S_{seq}$ secondo $\prec$. Risulta dunque che $m_{seq}$ è sempre estremo sinistro della sequenza di appartenenza.\\ 
+
+Assumiamo per assurdo che $m_{seq}$ non sia minimale di $S$ secondo $\prec^+$:\\
+per definizione di minimale, sappiamo che \[
+	m_{seq} \ \text{non è} \prec^+ \text{minimale di}\ S
+	\implies \exists\ s \in S \tc s \prec^+ m_{seq};
+\]
+per definizione di chiusura transitiva, possiamo inoltre affermare che
+\begin{align*}
+	& s \prec^+ m_{seq} \implies \\ 
+	& \tab \exists \ x_1, \ldots, x_n \tc x_i \prec x_{i+1} \per 1 \leq i \leq n-1 
+	  	   \con x_1 = s \text{,} \ x_n = m_{seq} \e n \geq 2.
+\end{align*}
+Abbiamo quindi individuato una sequenza che collega due elementi di $S$ in cui $m_{seq}$ non è l'estremo sinistro, ma questo non è possibile per quanto detto precedentemente. Possiamo quindi concludere che $S$ ha un elemento minimale secondo $\prec^+$ e tale elemento è proprio $m_{seq}$.
+\end{proof}
+
+\begin{customthm}{2.14.2}[$\prec^*$ è un ordinamento parziale]
+\label{th:2.14.2}
+Sia $A$ un insieme e sia ${\prec} \subseteq {A \times A}$ una relazione ben fondata, possiamo provare che $\prec^*$ è un ordinamento parziale.
+\end{customthm}
+\begin{proof}
+Per provare che $\prec^*$ è una una relazione d'ordine parziale su $A$, dobbiamo mostrare che $\prec^*$ è riflessiva, transitiva e antisimmetrica.\\
+Per definizione di chiusura riflessiva e transitiva, sappiamo che $\prec^*$ è ovviamente riflessiva e transitiva; dunque, ci rimane solo da dimostrare che è anche antisimmetrica: \[
+	\forall\ a,b \in A \valeche
+		a \prec^* b \myland b \prec^* a
+		\implies a = b.
+\]
+Consideriamo due qualsiasi $a,b \in A$ tali che $a \prec^* b \myland b \prec^* a$ e assumiamo per assurdo che  $a \neq b$.\\
+Essendo che $\prec^* = Id_A \cup \prec^+$, risulta che 
+\begin{align*}
+	& a \prec^* b \myland a \neq b \implies a \prec^+ b; \\
+	& b \prec^* a \myland a \neq b \implies b \prec^+ a.
+\end{align*}
+Dato che $\prec^+$ è transitiva, abbiamo che \[
+	a \prec^+ b \myland b \prec^+ a \implies a \prec^+ a;
+\]
+ma questo è impossibile essendo che, per il teorema \ref{th:2.14.1}, $\prec^+$ è ben fondata e una relazione ben fondata deve essere necessariamente irriflessiva: \[
+	\nexists\ a \in A \tc a \prec^+ a.
+\]
+Deve quindi essere che $a=b$ e, di conseguenza, possiamo affermare che $\prec^*$ è, oltre che riflessiva e transitiva, anche antisimmerica: abbiamo quindi provato che $\prec^*$ è una relazione d'ordine parziale su $A$.
+\end{proof}
+
+\section*{Esercizio 3.16}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 3.16}
+\label{es:3.16}
+
+\begin{tcolorbox} \cite{mssc2016}
+Dimostrare che \[
+	\forall \ E, E_1, E_2 \in L(G_a) \valeche
+	\forall \ n \in \N:
+		\ E \rightarrow E_1, 
+		\ E \rightarrow E_2, 
+		\ E_1 \longtwoheadrightarrow n
+		\ \text{implica}
+		\ E_2 \longtwoheadrightarrow n.
+\]
+\end{tcolorbox}
+
+\begin{customthm}{3.16.1} \label{th:3.16.1}
+Sia $G_a$ la grammatica che definisce la sintassi astratta delle espressioni aritmetiche e siano $\rightarrow$ e $\longtwoheadrightarrow$ le relazioni di transizione della semantica, rispettivamente, di computazione e di valutazione delle espressioni aritmetiche \cite{mssc2016}. Possiamo provare che \[
+	\forall \ E, E_1, E_2 \in L(G_a) \valeche
+	\forall \ n \in \N:
+		\ E \rightarrow E_1 \myland E \rightarrow E_2 \myland E_1 \longtwoheadrightarrow n
+		\implies E_2 \longtwoheadrightarrow n.
+\]
+\end{customthm}
+
+\begin{proof}
+Per l'equivalenza tra la semantica di computazione e la semantica di valutazione, sappiamo che
+\begin{align*}
+	& E_1 \longtwoheadrightarrow n \iff E_1 \xrightarrow{*} n \text{,} \\
+	& E_1 \longtwoheadrightarrow n \implies 
+		\exists \ k \in \N \tc Op(E_1)=k \myland E_1 \xrightarrow{k} n.
+\end{align*}
+Di conseguenza, per la definizione di chiusura riflessiva e transitiva della relazione $\rightarrow$, abbiamo che \[
+	E \rightarrow E_1 \xrightarrow{k} n \equiv E \xrightarrow{*} n.
+\]
+Inoltre, per la proposizione 3.17 delle note \cite{mssc2016}, risulta che
+\begin{align*}
+	E \rightarrow E_1 \myland Op(E_1)=k \implies & Op(E)=1+k \text{,}\\
+	E \rightarrow E_2 \implies & Op(E)=1+Op(E_2).
+\end{align*}
+Sappiamo quindi che $Op(E_2)=k$.\\
+A questo punto supponiamo per assurdo che $E_2 \xrightarrow{*} m$ con $m \neq n$.
+Per la proposizione 3.18 \cite{mssc2016}, possiamo affermare che \[
+	E_2 \xrightarrow{*} m \myland Op(E_2)=k \iff E_2 \xrightarrow{k} m;
+\]
+risulta quindi che $E \rightarrow E_2 \xrightarrow{k} m \equiv E \xrightarrow{*} m \con m \neq n$, ma questo non è possibile per via del determinismo della semantica di computazione: \[
+	E \xrightarrow{*} n \myland E \xrightarrow{*} m \implies m = n.
+\]
+Abbiamo dunque provato che $E_2 \xrightarrow{*} n$, ma allora, per l'equivalenza tra la semantica di computazione e quella di valutazione, deve essere che $E_2 \longtwoheadrightarrow n$.
+\end{proof}
+
+\section*{Esercizio 4.6}
+\phantomsection
+\addcontentsline{toc}{section}{Esercizio 4.6}
+\label{es:4.6}
+
+\begin{tcolorbox} \cite{mssc2016}
+Costruire gli automi associati alle seguenti espressioni regolari:
+\begin{enumerate}
+\item $a;(b + c)$;
+\item $a;b + a;c$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{customexe}{4.6.1}[\textit{Automa associato a} $a;(b + c)$]  \label{es:4.6.1} \hfill \\
+\begin{figure}
+\centering
+\begin{tikzpicture}
+[initial text = {}, every initial by arrow/.style={-Stealth, thick}, node distance = 3cm]
+\node[elliptic state, initial](q0){$a;(b+c)$};
+\node[elliptic state, right of=q0](q1){$1;(b+c)$};
+\node[elliptic state, right of=q1](q2){$b+c$};
+\node[elliptic state, right of=q2, accepting](q3){$1$};
+\path[-Stealth, thick, above, every loop/.style={-Stealth}]
+	(q0) edge node {$a$} (q1)
+	(q1) edge node {$\varepsilon$} (q2)
+	(q2) edge[bend left] node {$b$} (q3)
+		 edge[bend right] node {$c$} (q3)
+	(q3) edge[loop right] node {$\varepsilon$} (q3);
+\end{tikzpicture}
+\caption{Automa associato a $a;(b+c)$.} \label{fig:4.6.1}
+\end{figure}
+L'automa associato all'espressione regolare $a;(b + c)$ è mostrato figura \ref{fig:4.6.1}; le transizioni necessarie per costruirlo sono state derivate nel seguente modo:
+\begin{align*}
+&\inferrule*[Right=Seq1]
+	{\inferrule*[Right=Atom]{-}{a \xrightarrow{a} 1}}
+{a;(b+c) \xlongrightarrow{a} 1;(b+c)}
+&&\inferrule*[Right=Seq2] 
+	{\inferrule*[Right=Tic]{-}{1 \xlongrightarrow{\varepsilon} 1}}
+{1;(b+c) \xlongrightarrow{\varepsilon} (b+c)} \\
+&\inferrule*[Right=Sum1]
+	{\inferrule*[Right=Atom]{-}{b \xlongrightarrow{b} 1}}
+{(b+c) \xlongrightarrow{b} 1}
+&&\inferrule*[Right=Sum2]
+	{\inferrule*[Right=Atom]{-}{c \xlongrightarrow{c} 1}}
+{(b+c) \xlongrightarrow{c} 1}
+&&&\inferrule*[Right=Tic]{-}{1 \xlongrightarrow{\varepsilon} 1}
+\end{align*}
+\end{customexe}
+\hfill \\
+\begin{customexe}{4.6.2}[\textit{Automa associato a} $a;b + a;c$]  \label{es:4.6.2} \hfill \\
+\begin{figure} 
+\centering
+\begin{tikzpicture}
+[initial text = {}, every initial by arrow/.style={-Stealth, thick}, node distance = 2.3cm]
+\node[elliptic state, initial] (s) {$a;b + a;c$};
+\node[elliptic state, above right of=s] (p1) {$1;b$};
+\node[elliptic state, below right of=s] (q1) {$1;c$};
+\node[elliptic state, right of=p1] (p2) {$b$};
+\node[elliptic state, right of=q1] (q2) {$c$};
+\node[elliptic state, below right of=p2, accepting] (f) {$1$};
+\path[-Stealth, thick, above, every loop/.style={-Stealth}]
+	(s) edge node {$a$} (p1)
+	(s) edge node {$b$} (q1)
+	(p1) edge node {$\varepsilon$} (p2)
+	(q1) edge node {$\varepsilon$} (q2)
+	(p2) edge node {$b$} (f)
+	(q2) edge node {$c$} (f)
+	(f) edge[loop right] node {$\varepsilon$} (f);
+\end{tikzpicture}
+\caption{Automa associato a $a;b+a;c$.} \label{fig:4.6.2}
+\end{figure}
+L'automa associato all'espressione regolare $a;b + a;c$ è visionabile in figura \ref{fig:4.6.2} e le sue transizioni sono state derivate nel seguente modo:
+\begin{align*}
+&\inferrule*[Right=Sum1]
+	{\inferrule*[Right=Seq1]
+		{\inferrule*[Right=Atom]{-}{a \xrightarrow{a} 1}}
+	{a;b \xlongrightarrow{a} 1;b}}
+{a;b + a;c \xlongrightarrow{a} 1;b}
+&&\inferrule*[Right=Sum2]
+	{\inferrule*[Right=Seq1]
+		{\inferrule*[Right=Atom]{-}{a \xrightarrow{a} 1}}
+	{a;c \xlongrightarrow{a} 1;c}}
+{a;b + a;c \xlongrightarrow{a} 1;c} \\
+&\inferrule*[Right=Seq2] 
+	{\inferrule*[Right=Tic]{-}{1 \xlongrightarrow{\varepsilon} 1}}
+{1;b \xlongrightarrow{\varepsilon} b} 
+&&\inferrule*[Right=Seq2] 
+	{\inferrule*[Right=Tic]{-}{1 \xlongrightarrow{\varepsilon} 1}}
+{1;c \xlongrightarrow{\varepsilon} c} \\
+&\inferrule*[Right=Atom]{-}{b \xlongrightarrow{b} 1}
+&&\inferrule*[Right=Atom]{-}{c \xlongrightarrow{c} 1}
+&&&\inferrule*[Right=Tic]{-}{1 \xlongrightarrow{\varepsilon} 1}
+\end{align*}
+\end{customexe}
