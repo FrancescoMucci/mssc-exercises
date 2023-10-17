@@ -46,6 +46,26 @@
 \tikzset{elliptic state/.style={draw,ellipse}}
 %---------------------------------------------------------------
 
+%--------------------SETTINGS----------------------------------
+\newlength{\abcd} % for ab..z string length calculation
+\setlength{\extrarowheight}{3pt} % increase table row height
+\captionsetup{format=hang,font=small}
+
+\graphicspath{{other/img/}}
+
+% Layout settings
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	ignoremp,
+	bindingoffset = 1cm, 
+	textwidth     = 13.5cm,
+	textheight    = 21.5cm,
+	lmargin       = 3.5cm, % left margin
+	tmargin       = 4cm    % top margin 
+}
+%---------------------------------------------------------------
+
 %--------------------NEWCOMMANDS--------------------------------
 \newcommand{\myUni}{Università degli Studi di Firenze}
 \newcommand{\myFaculty}{Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
@@ -59,7 +79,7 @@
 \newcommand{\myMatricola}{6173140}
 \newcommand{\myMail}{\href{mailto:francesco.mucci@stud.unifi.it}{\texttt{francesco.mucci@stud.unifi.it}}\xspace}
 \newcommand{\myVersione}{Versione 1.0.0\xspace}
-\newcommand{\mycopyright}{\includegraphics[width=1.25cm]{1-front/copyright/by.png} 
+\newcommand{\mycopyright}{\includegraphics[width=1.25cm]{copyright/by.png} 
 	\href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}\xspace}
 
 \newcommand{\longtwoheadrightarrow}{\relbar\joinrel\twoheadrightarrow}
@@ -118,25 +138,6 @@
   {\endinnercustomexe}
 
 %--------------------------------------------------------------
-
-%--------------------SETTINGS----------------------------------
-\newlength{\abcd} % for ab..z string length calculation
-\setlength{\extrarowheight}{3pt} % increase table row height
-\captionsetup{format=hang,font=small}
-
-\graphicspath{{other/img/}}
-
-% Layout settings
-\usepackage{geometry}
-\geometry{
-	a4paper,
-	ignoremp,
-	bindingoffset = 1cm, 
-	textwidth     = 13.5cm,
-	textheight    = 21.5cm,
-	lmargin       = 3.5cm, % left margin
-	tmargin       = 4cm    % top margin 
-}
 
 \begin{document}
 %---------------------PARAMETERS-------------------------------
